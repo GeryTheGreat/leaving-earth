@@ -1,0 +1,379 @@
+[
+    {
+        "id": 0,
+        "name": "Earth",
+        "to": [
+            {
+                "id": 1,
+                "min": 0,
+                "max": 0,
+                "difficulty": 3
+            },
+            {
+                "id": 2,
+                "min": 0,
+                "max": 0,
+                "difficulty": 8
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "name": "Suborbital Space",
+        "to": [
+            {
+                "id": 2,
+                "min": 0,
+                "max": 0,
+                "difficulty": 5
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Earth Orbit",
+        "to": [
+            {
+                "id": 0,
+                "min": 0,
+                "max": 0,
+                "difficulty": 0
+            },
+            {
+                "id": 3,
+                "min": 0,
+                "max": 1,
+                "difficulty": 1
+            },
+            {
+                "id": 4,
+                "min": 1,
+                "max": 1,
+                "difficulty": 3
+            },
+            {
+                "id": 5,
+                "min": 1,
+                "max": 1,
+                "difficulty": 6
+            },
+            {
+                "id": 6,
+                "min": 0,
+                "max": 1,
+                "difficulty": 3
+            },
+            {
+                "id": 7,
+                "min": 3,
+                "max": 3,
+                "difficulty": 3
+            },
+            {
+                "id": 8,
+                "min": 3,
+                "max": 3,
+                "difficulty": 5
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Lunar Fly-by",
+        "to": [
+            {
+                "id": 2,
+                "min": 0,
+                "max": 1,
+                "difficulty": 1
+            },
+            {
+                "id": 6,
+                "min": 0,
+                "max": 1,
+                "difficulty": 2
+            },
+            {
+                "id": 9,
+                "min": 0,
+                "max": 0,
+                "difficulty": 4
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Inner Planets Transfer",
+        "to": [
+            {
+                "id": 2,
+                "min": 1,
+                "max": 1,
+                "difficulty": 3
+            },
+            {
+                "id": 10,
+                "min": 1,
+                "max": 1,
+                "difficulty": 5
+            },
+            {
+                "id": 11,
+                "min": 1,
+                "max": 1,
+                "difficulty": 2
+            },
+            {
+                "id": 12,
+                "min": 1,
+                "max": 1,
+                "difficulty": 3
+            },
+            {
+                "id": 13,
+                "min": 1,
+                "max": 1,
+                "difficulty": 5
+            },
+            {
+                "id": 8,
+                "min": 2,
+                "max": 2,
+                "difficulty": 4
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Outer Planets Transfer",
+        "to": []
+    },
+    {
+        "id": 6,
+        "name": "Lunar Orbit",
+        "to": [
+            {
+                "id": 2,
+                "min": 0,
+                "max": 1,
+                "difficulty": 3
+            },
+            {
+                "id": 9,
+                "min": 0,
+                "max": 0,
+                "difficulty": 2
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Mars Fly-by",
+        "to": [
+            {
+                "id": 8,
+                "min": 0,
+                "max": 1,
+                "difficulty": 3
+            },
+            {
+                "id": 14,
+                "min": 0,
+                "max": 0,
+                "difficulty": 3
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Mars Orbit",
+        "to": [
+            {
+                "id": 14,
+                "min": 0,
+                "max": 0,
+                "difficulty": 0
+            },
+            {
+                "id": 2,
+                "min": 3,
+                "max": 3,
+                "difficulty": 5
+            },
+            {
+                "id": 4,
+                "min": 2,
+                "max": 2,
+                "difficulty": 4
+            },
+            {
+                "id": 5,
+                "min": 1,
+                "max": 1,
+                "difficulty": 5
+            },
+            {
+                "id": 15,
+                "min": 0,
+                "max": 1,
+                "difficulty": 1
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Moon",
+        "to": [
+            {
+                "id": 6,
+                "min": 0,
+                "max": 0,
+                "difficulty": 2
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Mercury Fly-by",
+        "to": [
+            {
+                "id": 16,
+                "min": 0,
+                "max": 1,
+                "difficulty": 2
+            },
+            {
+                "id": 17,
+                "min": 0,
+                "max": 0,
+                "difficulty": 4
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Venus Fly-by",
+        "to": [
+            {
+                "id": 12,
+                "min": 0,
+                "max": 1,
+                "difficulty": 1
+            },
+            {
+                "id": 18,
+                "min": 0,
+                "max": 0,
+                "difficulty": 1
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Venus Orbit",
+        "to": [
+            {
+                "id": 18,
+                "min": 0,
+                "max": 0,
+                "difficulty": 0
+            },
+            {
+                "id": 4,
+                "min": 1,
+                "max": 1,
+                "difficulty": 3
+            },
+            {
+                "id": 5,
+                "min": 1,
+                "max": 1,
+                "difficulty": 9
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Ceres",
+        "to": [
+            {
+                "id": 4,
+                "min": 2,
+                "max": 2,
+                "difficulty": 5
+            },
+            {
+                "id": 5,
+                "min": 1,
+                "max": 1,
+                "difficulty": 3
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "name": "Mars",
+        "to": [
+            {
+                "id": 8,
+                "min": 0,
+                "max": 0,
+                "difficulty": 3
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "name": "Phobos",
+        "to": [
+            {
+                "id": 8,
+                "min": 0,
+                "max": 1,
+                "difficulty": 1
+            }
+        ]
+    },
+    {
+        "id": 16,
+        "name": "Mercury Orbit",
+        "to": [
+            {
+                "id": 4,
+                "min": 1,
+                "max": 1,
+                "difficulty": 7
+            },
+            {
+                "id": 17,
+                "min": 0,
+                "max": 0,
+                "difficulty": 2
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "name": "Mercury",
+        "to": [
+            {
+                "id": 16,
+                "min": 0,
+                "max": 0,
+                "difficulty": 2
+            }
+        ]
+    },
+    {
+        "id": 18,
+        "name": "Venus",
+        "to": [
+            {
+                "id": 12,
+                "min": 0,
+                "max": 0,
+                "difficulty": 6
+            }
+        ]
+    }
+]

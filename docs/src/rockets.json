@@ -1,0 +1,27 @@
+{
+    "juno": {
+        "name": "juno",
+        "mass": 1,
+        "thrust": 4
+    },
+    "atlas": {
+        "name": "atlas",
+        "mass": 4,
+        "thrust": 27
+    },
+    "soyuz": {
+        "name": "soyuz",
+        "mass": 9,
+        "thrust": 90
+    },
+    "proton": {
+        "name": "proton",
+        "mass": 6,
+        "thrust": 70
+    },
+    "saturn": {
+        "name": "saturn",
+        "mass": 20,
+        "thrust": 200
+    }
+}
