@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/leaving-earth/static/css/main.c4886711.chunk.css",
-    "main.js": "/leaving-earth/static/js/main.627cbacb.chunk.js",
-    "main.js.map": "/leaving-earth/static/js/main.627cbacb.chunk.js.map",
+    "main.js": "/leaving-earth/static/js/main.f924573d.chunk.js",
+    "main.js.map": "/leaving-earth/static/js/main.f924573d.chunk.js.map",
     "runtime-main.js": "/leaving-earth/static/js/runtime-main.4eae3a55.js",
     "runtime-main.js.map": "/leaving-earth/static/js/runtime-main.4eae3a55.js.map",
     "static/js/2.5f2077f3.chunk.js": "/leaving-earth/static/js/2.5f2077f3.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.4eae3a55.js",
     "static/js/2.5f2077f3.chunk.js",
     "static/css/main.c4886711.chunk.css",
-    "static/js/main.627cbacb.chunk.js"
+    "static/js/main.f924573d.chunk.js"
   ]
 }

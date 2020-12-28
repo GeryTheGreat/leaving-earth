@@ -43,6 +43,9 @@ class App extends Component {
     this.props.changeIon(count);
   }
   yearValidator(years, maneuver) {
+    if (maneuver.slingshot) {
+      return false;
+    }
     if (maneuver.max === 0) {
       return false;
     }
