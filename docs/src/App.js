@@ -74,6 +74,9 @@ class App extends Component {
     window.location.reload();
   }
   deleteSavedroute(route) {
+    if (!window.confirm(`Delete ${route}?`)) {
+      return false;
+    }
     delete this.props.allroutes[route];
     localStorage.setItem('allroutes', JSON.stringify(this.props.allroutes));
     if (route === 'route ' + this.props.currentroute) {
@@ -81,7 +84,11 @@ class App extends Component {
     }
     window.location.reload();
   }
-  deleteAllSavedroutes(route) {
+  deleteAllSavedroutes() {
+    if (!window.confirm(`Clear everything?`)) {
+      return false;
+    }
+
     localStorage.clear();
 
     window.location.reload();
