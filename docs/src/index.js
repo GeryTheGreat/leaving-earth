@@ -7,9 +7,40 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+var allroutes = null;
+try {
+  allroutes = JSON.parse(localStorage.getItem('allroutes'));
+} catch (e) {
+
+}
+if (!allroutes) {
+  allroutes = {};
+}
+
+var currentroute = localStorage.getItem('currentroute');
+if (!currentroute) {
+  currentroute = 1;
+  localStorage.setItem('currentroute', currentroute);
+}
+if (!allroutes['route ' + currentroute]) {
+  allroutes['route ' + currentroute] = JSON.stringify({});
+}
+
+const store = configureStore(JSON.parse(allroutes['route ' + currentroute]));
+
+let prevstate = JSON.stringify(store.getState());
+store.subscribe(() => {
+  let newstate = JSON.stringify(store.getState());
+
+  if (newstate !== prevstate) {
+    allroutes['route ' + currentroute] = newstate;
+    localStorage.setItem('allroutes', JSON.stringify(allroutes));
+  }
+})
+
 ReactDOM.render(
-  <Provider store={configureStore()}>
-    <App />
+  <Provider store={store}>
+    <App currentroute={currentroute} allroutes={allroutes} />
   </Provider>,
   document.getElementById('root')
 );

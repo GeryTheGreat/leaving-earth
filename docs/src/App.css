@@ -90,6 +90,9 @@ button.success{
 button.danger{
   background-color: #f44336
 }
+button.default{
+  color: black
+}
 button.rounded{
   border-radius: 8px;
 }
@@ -103,4 +106,14 @@ table {
 
 td{
   white-space: nowrap;
+}
+
+table.bordered {
+  border-collapse: collapse;
+}
+table.bordered td, table.bordered th{
+  border: 1px solid lightgray;
+}
+table.bordered th{
+  border-bottom: 2px solid black;
 }

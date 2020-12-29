@@ -12,7 +12,7 @@
     "soyuz": {
         "name": "soyuz",
         "mass": 9,
-        "thrust": 90
+        "thrust": 80
     },
     "proton": {
         "name": "proton",
