@@ -25,17 +25,20 @@
         "thrust": 200
     },
     "daedalus": {
-        "name": "Daedalus",
+        "name": "daedalus",
+        "perma": true,
         "mass": 1,
         "thrust": 22
     },
     "ion": {
-        "name": "Ion",
+        "name": "ion",
+        "perma": true,
         "mass": 1,
         "thrust": 5
     },
     "shuttle": {
-        "name": "Space Shuttle",
+        "name": "shuttle",
+        "perma": true,
         "mass": 4,
         "thrust": 75
     }

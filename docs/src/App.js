@@ -4,10 +4,12 @@ import Select from 'react-select';
 
 import './App.css';
 
-import { addRoute, removeRoute, aeroBrakeToggle, changeMass, changeYears, changeRocket, changeIon } from './actions/routeaction';
+import { addRoute, removeRoute, aeroBrakeToggle, changeMass, changeYears, changeRocket, changeIon, useRocket, removeRocket } from './actions/routeaction';
 
 import map from './map_exp';
-import { juno, atlas, soyuz, proton, saturn, ion } from './rockets';
+import rockets from './rockets';
+
+const { juno, atlas, soyuz, proton, saturn, ion } = rockets;
 
 class App extends Component {
   constructor(props) {
@@ -37,6 +39,9 @@ class App extends Component {
     this.props.changeMass(mass, i);
   }
   changeRocket = (count, i, rocket) => {
+    if (count < 0) {
+      return this.props.removeRocket(rocket,i);
+    }
     this.props.changeRocket(count, i, rocket);
   }
   changeIon = (count) => {
@@ -93,6 +98,9 @@ class App extends Component {
 
     window.location.reload();
   }
+  useRocket(event, i) {
+    this.props.useRocket(event.value, i);;
+  }
   render() {
     var lastsavedroutenumber = 0;
 
@@ -123,7 +131,7 @@ class App extends Component {
           <button style={{ marginTop: '10px' }} className={"success"} onClick={event => this.addRoute(event, lastroute)}>Add Route</button>
         </div>
 
-        <table>
+        <table className={'bordered-top'}>
           <thead>
             <tr>
               <th>Region</th>
@@ -132,16 +140,7 @@ class App extends Component {
               <th>Payload</th>
               <th>Total Mass</th>
               <th>Thrust</th>
-              <th colSpan="6">Rockets</th>
-            </tr>
-            <tr>
-              <th colSpan="6"></th>
-              <th>Juno</th>
-              <th>Atlas</th>
-              <th>Soyuz</th>
-              <th>Proton</th>
-              <th>Saturn</th>
-              <th>Ion</th>
+              <th>Rockets</th>
             </tr>
           </thead>
           <tbody>
@@ -175,35 +174,45 @@ class App extends Component {
                 <td style={{ color: (maneuver && region.mass * region.difficulty > region.thrust) ? 'red' : 'green' }}>
                   {region.thrust} {maneuver && "/ " + (region.mass * region.difficulty)}
                 </td>
-                <td>
-                  <button className={"danger rounded small"} onClick={() => this.changeRocket(Math.max(0, region.juno - 1), i, juno)}>-</button>
-                  {region.juno}
-                  <button className={"success rounded small"} onClick={() => this.changeRocket(region.juno + 1, i, juno)}>+</button>
-                </td>
-                <td>
-                  <button className={"danger rounded small"} onClick={() => this.changeRocket(Math.max(0, region.atlas - 1), i, atlas)}>-</button>
-                  {region.atlas}
-                  <button className={"success rounded small"} onClick={() => this.changeRocket(region.atlas + 1, i, atlas)}>+</button>
-                </td>
-                <td>
-                  <button className={"danger rounded small"} onClick={() => this.changeRocket(Math.max(0, region.soyuz - 1), i, soyuz)}>-</button>
-                  {region.soyuz}
-                  <button className={"success rounded small"} onClick={() => this.changeRocket(region.soyuz + 1, i, soyuz)}>+</button>
-                </td>
-                <td>
-                  <button className={"danger rounded small"} onClick={() => this.changeRocket(Math.max(0, region.proton - 1), i, proton)}>-</button>
-                  {region.proton}
-                  <button className={"success rounded small"} onClick={() => this.changeRocket(region.proton + 1, i, proton)}>+</button>
-                </td>
-                <td>
-                  <button className={"danger rounded small"} onClick={() => this.changeRocket(Math.max(0, region.saturn - 1), i, saturn)}>-</button>
-                  {region.saturn}
-                  <button className={"success rounded small"} onClick={() => this.changeRocket(region.saturn + 1, i, saturn)}>+</button>
-                </td>
-                <td>
-                  <button className={"danger rounded small"} onClick={() => this.changeIon(Math.max(0, this.props.ion - 1))}>-</button>
-                  {this.props.ion}
-                  <button className={"success rounded small"} onClick={() => this.changeIon(this.props.ion + 1)}>+</button>
+                <td style={{ minWidth: '350px' }}>
+                  <Select onChange={event => this.useRocket(event, i)} options={Object.values(rockets).map(rocket => ({ value: rocket.name, label: `${rocket.name} (Mass: ${rocket.mass}, Thrust: ${rocket.thrust})` }))} />
+
+                  {region.shownrockets.includes('juno') && <div style={{ float: 'left' }}>
+                    <h5>Juno</h5>
+                    <button className={"danger rounded small"} onClick={() => this.changeRocket(region.juno - 1, i, juno)}>-</button>
+                    {region.juno}
+                    <button className={"success rounded small"} onClick={() => this.changeRocket(region.juno + 1, i, juno)}>+</button>
+                  </div>}
+                  {region.shownrockets.includes('atlas') && <div style={{ float: 'left' }}>
+                    <h5>Atlas</h5>
+                    <button className={"danger rounded small"} onClick={() => this.changeRocket(region.atlas - 1, i, atlas)}>-</button>
+                    {region.atlas}
+                    <button className={"success rounded small"} onClick={() => this.changeRocket(region.atlas + 1, i, atlas)}>+</button>
+                  </div>}
+                  {region.shownrockets.includes('soyuz') && <div style={{ float: 'left' }}>
+                    <h5>Soyuz</h5>
+                    <button className={"danger rounded small"} onClick={() => this.changeRocket( region.soyuz - 1, i, soyuz)}>-</button>
+                    {region.soyuz}
+                    <button className={"success rounded small"} onClick={() => this.changeRocket(region.soyuz + 1, i, soyuz)}>+</button>
+                  </div>}
+                  {region.shownrockets.includes('proton') && <div style={{ float: 'left' }}>
+                    <h5>Proton</h5>
+                    <button className={"danger rounded small"} onClick={() => this.changeRocket(region.proton - 1, i, proton)}>-</button>
+                    {region.proton}
+                    <button className={"success rounded small"} onClick={() => this.changeRocket(region.proton + 1, i, proton)}>+</button>
+                  </div>}
+                  {region.shownrockets.includes('saturn') && <div style={{ float: 'left' }}>
+                    <h5>Saturn</h5>
+                    <button className={"danger rounded small"} onClick={() => this.changeRocket(region.saturn - 1, i, saturn)}>-</button>
+                    {region.saturn}
+                    <button className={"success rounded small"} onClick={() => this.changeRocket(region.saturn + 1, i, saturn)}>+</button>
+                  </div>}
+                  {region.shownrockets.includes('ion') && <div style={{ float: 'left' }}>
+                    <h5>Ion</h5>
+                    <button className={"danger rounded small"} onClick={() => this.changeIon(this.props.ion - 1)}>-</button>
+                    {this.props.ion}
+                    <button className={"success rounded small"} onClick={() => this.changeIon(this.props.ion + 1)}>+</button>
+                  </div>}
                 </td>
 
               </tr>
@@ -263,5 +272,5 @@ export default connect((state, ownProps) => ({
   currentroute: ownProps.currentroute,
   allroutes: ownProps.allroutes,
   route: state.routeReducer.route,
-  ion: state.routeReducer.ion,
-}), { addRoute, removeRoute, aeroBrakeToggle, changeMass, changeYears, changeRocket, changeIon })(App);
+  ion: state.routeReducer.ion
+}), { addRoute, removeRoute, aeroBrakeToggle, changeMass, changeYears, changeRocket, changeIon, useRocket, removeRocket })(App);
