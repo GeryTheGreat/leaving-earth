@@ -104,7 +104,7 @@ class App extends Component {
           {Object.keys(this.props.allroutes).map(route => {
             var savedroutenumber = parseInt(route.match(/\d+/g)[0], 10);
             lastsavedroutenumber = Math.max(savedroutenumber, lastsavedroutenumber);
-            return <div key={route} style={{ width: "12%", display: 'inline-block' }}>
+            return <div key={route} style={{ width: "185px", display: 'inline-block' }}>
               <button onClick={() => this.changeSavedroute(savedroutenumber)} className={route === 'route ' + this.props.currentroute ? 'success' : 'default'} style={{ margin: '10px 0' }}>{route}</button>
               <button onClick={() => this.deleteSavedroute(route)} className={'danger small'} >X</button>
             </div>
