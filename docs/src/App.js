@@ -7,7 +7,7 @@ import './App.css';
 import { addRoute, removeRoute, aeroBrakeToggle, changeMass, changeYears, changeRocket, changeIon } from './actions/routeaction';
 
 import map from './map_exp';
-import { juno, atlas, soyuz, proton, saturn } from './rockets';
+import { juno, atlas, soyuz, proton, saturn, ion } from './rockets';
 
 class App extends Component {
   constructor(props) {
@@ -246,7 +246,7 @@ class App extends Component {
               return <tr key={i}>
                 <td>{region.name}</td>
                 <td>{region.difficulty}</td>
-                <td>{region.mass - region.rocketMass - this.props.ion}</td>
+                <td>{region.mass - region.rocketMass - this.props.ion * ion.mass}</td>
                 <td>{rockets.slice(0, -2)}</td>
               </tr>
             })}

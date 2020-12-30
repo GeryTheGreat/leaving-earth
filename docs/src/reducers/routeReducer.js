@@ -1,3 +1,5 @@
+import { ion, shuttle } from '../rockets';
+
 const routes = (state = { route: [], ion: 0 }, action) => {
     let totalmass = state.ion;
     let newregion;
@@ -16,7 +18,7 @@ const routes = (state = { route: [], ion: 0 }, action) => {
                 newmass = lastRegion[0].mass;
                 const maneuver = action.payload.to.find(element => element.id === lastRegion[0].id);
                 const newyears = Math.min(maneuver.min, maneuver.max);
-                route = [...previousRegions, Object.assign({}, lastRegion[0], { maneuver, difficulty: maneuver.difficulty, years: newyears, thrust: newyears * state.ion * 5 + lastRegion[0].thrust })];
+                route = [...previousRegions, Object.assign({}, lastRegion[0], { maneuver, difficulty: maneuver.difficulty, years: newyears, thrust: newyears * state.ion * ion.thrust + lastRegion[0].thrust })];
             }
 
 
@@ -33,7 +35,7 @@ const routes = (state = { route: [], ion: 0 }, action) => {
                     newregion = region;
                     if (action.payload === i + 1) {
                         newregion = Object.assign({}, region);
-                        newregion.thrust -= state.ion * 5 * region.years;
+                        newregion.thrust -= state.ion * ion.thrust * region.years;
                         delete newregion.maneuver;
                         delete newregion.years;
                         delete newregion.difficulty;
@@ -54,7 +56,7 @@ const routes = (state = { route: [], ion: 0 }, action) => {
                         const newmaneuver = region.maneuver.aerobraking && !region.aerobraking ? region.maneuver.aerobraking : region.maneuver;
                         const newyears = Math.min(newmaneuver.min, newmaneuver.max);
 
-                        newregion = Object.assign({}, region, { aerobraking: !region.aerobraking, difficulty: newmaneuver.difficulty, years: newyears, thrust: region.thrust + (newyears - oldyears) * state.ion * 5 });
+                        newregion = Object.assign({}, region, { aerobraking: !region.aerobraking, difficulty: newmaneuver.difficulty, years: newyears, thrust: region.thrust + (newyears - oldyears) * state.ion * ion.thrust });
                     }
 
                     return newregion;
@@ -63,7 +65,7 @@ const routes = (state = { route: [], ion: 0 }, action) => {
 
         case 'CHANGE_MASS':
 
-            totalmass = state.ion;
+            totalmass = state.ion * ion.mass;
             const recalculatedRegions = state.route.map((region, i) => {
                 let extraMass = region.extraMass;
                 if (i === action.payload.i) {
@@ -98,7 +100,7 @@ const routes = (state = { route: [], ion: 0 }, action) => {
                                 }
                             }
                         }
-                        const thrustchange = region.thrust + (action.payload.years - region.years) * state.ion * 5;
+                        const thrustchange = region.thrust + (action.payload.years - region.years) * state.ion * ion.thrust;
                         newregion = Object.assign({}, region, { years: action.payload.years, thrust: thrustchange, difficulty: newdifficulty });
                         return newregion;
                     }
@@ -120,14 +122,14 @@ const routes = (state = { route: [], ion: 0 }, action) => {
                 })
             }
         case 'CHANGE_ION':
-            totalmass = action.payload;
+            totalmass = action.payload * ion.mass;
             let ionchange = action.payload - state.ion;
             return {
                 ...state,
                 ion: action.payload,
                 route: state.route.map((region, i) => {
                     totalmass += region.extraMass + region.rocketMass;
-                    const newionthrust = region.years ? region.thrust + ionchange * region.years * 5 : region.thrust;
+                    const newionthrust = region.years ? region.thrust + ionchange * region.years * ion.thrust : region.thrust;
                     return Object.assign({}, region, { mass: totalmass, thrust: newionthrust });
                 })
             }

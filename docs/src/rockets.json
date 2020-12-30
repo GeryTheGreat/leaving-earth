@@ -23,5 +23,20 @@
         "name": "saturn",
         "mass": 20,
         "thrust": 200
+    },
+    "daedalus": {
+        "name": "Daedalus",
+        "mass": 1,
+        "thrust": 22
+    },
+    "ion": {
+        "name": "Ion",
+        "mass": 1,
+        "thrust": 5
+    },
+    "shuttle": {
+        "name": "Space Shuttle",
+        "mass": 4,
+        "thrust": 75
     }
 }
