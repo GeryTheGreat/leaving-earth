@@ -117,3 +117,8 @@ table.bordered td, table.bordered th{
 table.bordered th{
   border-bottom: 2px solid black;
 }
+
+
+table.bordered-top td{
+  border-top: 1px dotted black;
+}
