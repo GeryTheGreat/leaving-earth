@@ -24,7 +24,7 @@ const routes = (state = { route: [], ion: 0, daedalus: 0, shuttle: 0 }, action) 
 
             return {
                 ...state,
-                route: [...route, Object.assign({}, action.payload, { mass: newmass, aerobraking: false, extraMass: 0, rocketMass: 0, shownrockets: [], thrust: 0, juno: 0, atlas: 0, soyuz: 0, proton: 0, saturn: 0 })]
+                route: [...route, Object.assign({}, action.payload, { mass: newmass, aerobraking: false, extraMass: 0, rocketMass: 0, thrust: 0, juno: 0, atlas: 0, soyuz: 0, proton: 0, saturn: 0 })]
             }
 
         case 'REMOVE_ROUTE':
@@ -131,31 +131,6 @@ const routes = (state = { route: [], ion: 0, daedalus: 0, shuttle: 0 }, action) 
                     totalmass += region.extraMass + region.rocketMass;
                     const newionthrust = region.years ? region.thrust + ionchange * region.years * ion.thrust : region.thrust;
                     return Object.assign({}, region, { mass: totalmass, thrust: newionthrust });
-                })
-            }
-        case 'USE_ROCKET':
-            return {
-                ...state,
-                route: state.route.map((region, i) => {
-                    if (i === action.payload.i) {
-                        if (region.shownrockets.includes(action.payload.rocket)) {
-                            return region;
-
-                        }
-                        return Object.assign({}, region, { shownrockets: region.shownrockets.concat(action.payload.rocket) });
-                    }
-                    return region;
-                })
-            }
-        case 'REMOVE_ROCKET':
-            console.log(action.payload);
-            return {
-                ...state,
-                route: state.route.map((region, i) => {
-                    if (i === action.payload.i) {
-                        return Object.assign({}, region, { shownrockets: region.shownrockets.filter(rocket => rocket !== action.payload.rocket.name) });
-                    }
-                    return region;
                 })
             }
         default:

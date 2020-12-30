@@ -26,19 +26,18 @@
     },
     "daedalus": {
         "name": "daedalus",
-        "perma": true,
+        "inactive": true,
         "mass": 1,
         "thrust": 22
     },
     "ion": {
         "name": "ion",
-        "perma": true,
         "mass": 1,
         "thrust": 5
     },
     "shuttle": {
         "name": "shuttle",
-        "perma": true,
+        "inactive": true,
         "mass": 4,
         "thrust": 75
     }

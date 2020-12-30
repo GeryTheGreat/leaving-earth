@@ -4,7 +4,7 @@ import Select from 'react-select';
 
 import './App.css';
 
-import { addRoute, removeRoute, aeroBrakeToggle, changeMass, changeYears, changeRocket, changeIon, useRocket, removeRocket } from './actions/routeaction';
+import { addRoute, removeRoute, aeroBrakeToggle, changeMass, changeYears, changeRocket, changeIon } from './actions/routeaction';
 
 import map from './map_exp';
 import rockets from './rockets';
@@ -39,8 +39,8 @@ class App extends Component {
     this.props.changeMass(mass, i);
   }
   changeRocket = (count, i, rocket) => {
-    if (count < 0) {
-      return this.props.removeRocket(rocket,i);
+    if (rocket.name === 'ion') {
+      return this.props.changeIon(Math.max(1, this.props.ion));
     }
     this.props.changeRocket(count, i, rocket);
   }
@@ -97,9 +97,6 @@ class App extends Component {
     localStorage.clear();
 
     window.location.reload();
-  }
-  useRocket(event, i) {
-    this.props.useRocket(event.value, i);;
   }
   render() {
     var lastsavedroutenumber = 0;
@@ -175,41 +172,41 @@ class App extends Component {
                   {region.thrust} {maneuver && "/ " + (region.mass * region.difficulty)}
                 </td>
                 <td style={{ minWidth: '350px' }}>
-                  <Select onChange={event => this.useRocket(event, i)} options={Object.values(rockets).map(rocket => ({ value: rocket.name, label: `${rocket.name} (Mass: ${rocket.mass}, Thrust: ${rocket.thrust})` }))} />
+                  <Select onChange={event => this.changeRocket(Math.max(region[event.value.name], 1), i, event.value)} options={Object.values(rockets).filter(rocket => !rocket.inactive && (rocket.name !== 'ion' || region.years > 0)).map(rocket => ({ value: rocket, label: `${rocket.name} (Mass: ${rocket.mass}, Thrust: ${rocket.thrust})` }))} />
 
-                  {region.shownrockets.includes('juno') && <div style={{ float: 'left' }}>
+                  {region.juno > 0 && <div style={{ float: 'left' }}>
                     <h5>Juno</h5>
-                    <button className={"danger rounded small"} onClick={() => this.changeRocket(region.juno - 1, i, juno)}>-</button>
+                    <button className={"danger rounded small"} onClick={() => this.changeRocket(Math.max(0, region.juno - 1), i, juno)}>-</button>
                     {region.juno}
                     <button className={"success rounded small"} onClick={() => this.changeRocket(region.juno + 1, i, juno)}>+</button>
                   </div>}
-                  {region.shownrockets.includes('atlas') && <div style={{ float: 'left' }}>
+                  {region.atlas > 0 && <div style={{ float: 'left' }}>
                     <h5>Atlas</h5>
-                    <button className={"danger rounded small"} onClick={() => this.changeRocket(region.atlas - 1, i, atlas)}>-</button>
+                    <button className={"danger rounded small"} onClick={() => this.changeRocket(Math.max(0, region.atlas - 1), i, atlas)}>-</button>
                     {region.atlas}
                     <button className={"success rounded small"} onClick={() => this.changeRocket(region.atlas + 1, i, atlas)}>+</button>
                   </div>}
-                  {region.shownrockets.includes('soyuz') && <div style={{ float: 'left' }}>
+                  {region.soyuz > 0 && <div style={{ float: 'left' }}>
                     <h5>Soyuz</h5>
-                    <button className={"danger rounded small"} onClick={() => this.changeRocket( region.soyuz - 1, i, soyuz)}>-</button>
+                    <button className={"danger rounded small"} onClick={() => this.changeRocket(Math.max(0, region.soyuz - 1), i, soyuz)}>-</button>
                     {region.soyuz}
                     <button className={"success rounded small"} onClick={() => this.changeRocket(region.soyuz + 1, i, soyuz)}>+</button>
                   </div>}
-                  {region.shownrockets.includes('proton') && <div style={{ float: 'left' }}>
+                  {region.proton > 0 && <div style={{ float: 'left' }}>
                     <h5>Proton</h5>
-                    <button className={"danger rounded small"} onClick={() => this.changeRocket(region.proton - 1, i, proton)}>-</button>
+                    <button className={"danger rounded small"} onClick={() => this.changeRocket(Math.max(0, region.proton - 1), i, proton)}>-</button>
                     {region.proton}
                     <button className={"success rounded small"} onClick={() => this.changeRocket(region.proton + 1, i, proton)}>+</button>
                   </div>}
-                  {region.shownrockets.includes('saturn') && <div style={{ float: 'left' }}>
+                  {region.saturn > 0 && <div style={{ float: 'left' }}>
                     <h5>Saturn</h5>
-                    <button className={"danger rounded small"} onClick={() => this.changeRocket(region.saturn - 1, i, saturn)}>-</button>
+                    <button className={"danger rounded small"} onClick={() => this.changeRocket(Math.max(0, region.saturn - 1), i, saturn)}>-</button>
                     {region.saturn}
                     <button className={"success rounded small"} onClick={() => this.changeRocket(region.saturn + 1, i, saturn)}>+</button>
                   </div>}
-                  {region.shownrockets.includes('ion') && <div style={{ float: 'left' }}>
+                  {this.props.ion > 0 && region.years > 0 && <div style={{ float: 'left' }}>
                     <h5>Ion</h5>
-                    <button className={"danger rounded small"} onClick={() => this.changeIon(this.props.ion - 1)}>-</button>
+                    <button className={"danger rounded small"} onClick={() => this.changeIon(Math.max(0, this.props.ion - 1))}>-</button>
                     {this.props.ion}
                     <button className={"success rounded small"} onClick={() => this.changeIon(this.props.ion + 1)}>+</button>
                   </div>}
@@ -272,5 +269,5 @@ export default connect((state, ownProps) => ({
   currentroute: ownProps.currentroute,
   allroutes: ownProps.allroutes,
   route: state.routeReducer.route,
-  ion: state.routeReducer.ion
-}), { addRoute, removeRoute, aeroBrakeToggle, changeMass, changeYears, changeRocket, changeIon, useRocket, removeRocket })(App);
+  ion: state.routeReducer.ion,
+}), { addRoute, removeRoute, aeroBrakeToggle, changeMass, changeYears, changeRocket, changeIon })(App);

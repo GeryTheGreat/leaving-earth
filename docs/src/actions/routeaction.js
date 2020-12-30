@@ -32,13 +32,3 @@ export const changeIon = (count) => ({
     type: 'CHANGE_ION',
     payload: count
 })
-
-export const useRocket = (rocket, i) => ({
-    type: 'USE_ROCKET',
-    payload: { rocket, i }
-})
-
-export const removeRocket = (rocket, i) => ({
-    type: 'REMOVE_ROCKET',
-    payload: { rocket, i }
-})
