@@ -6,3 +6,5 @@
 
 # production
 /docs/build
+
+/docs/.eslintcache
