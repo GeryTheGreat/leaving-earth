@@ -216,7 +216,7 @@ class App extends Component {
             })}
           </tbody>
         </table>
-        <table className="bordered">
+        <table className="bordered" style={{ marginTop: '10px', marginBottom: '10px' }}>
           <thead>
             <tr>
               <th>MANEUVER</th>
@@ -258,7 +258,8 @@ class App extends Component {
             })}
           </tbody>
         </table>
-
+        <hr/>
+        <p>Leaving Earth Helper v1.2.2. Powered by ReactJs. Created by GeryTheGreat™. No rights reserved.</p>
       </div>
     )
   };
